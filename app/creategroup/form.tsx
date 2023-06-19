@@ -1,16 +1,13 @@
 'use client'
 
-import { ChangeEvent, useEffect, useState } from "react"
+import { ChangeEvent, useState } from "react"
 
 export const CreateGroupForm = () => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [loading, setLoading] = useState<boolean>(false);
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [formValues, setFormValues] = useState({
     name: "",
     private: false,
   });
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   const [error, setError] = useState<boolean>(false)
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -64,17 +61,6 @@ export const CreateGroupForm = () => {
           className={`${input_style}`}
         />
       </div>
-      {/* <div className="mb-6">
-        <input
-          required
-          type="email"
-          name="email"
-          value={formValues.email}
-          onChange={handleChange}
-          placeholder="Email address"
-          className={`${input_style}`}
-        />
-      </div> */}
       <label htmlFor="private">
         Private Group?
       </label>

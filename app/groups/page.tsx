@@ -1,11 +1,10 @@
-'use client'
-
-import { createGroupAction } from "@/components/_actions"
-import { CreateGroupForm } from "./form"
+import GetGroups from "./data"
 
 export default async function Page() {
-
   return (
-    <CreateGroupForm />
+    <>
+      <h3>Groups</h3>
+      <GetGroups />
+    </>
   )
 }
