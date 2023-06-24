@@ -18,11 +18,12 @@ model Todo {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
+  id        Int     @id @default(autoincrement())
   firstName String
   lastName  String
   age       Int
   username  String
+  groups    Group[]
 }
 
 model Group {
@@ -30,4 +31,5 @@ model Group {
   name      String
   createdAt DateTime @default(now())
   private   Boolean  @default(false)
+  users     User[]
 }

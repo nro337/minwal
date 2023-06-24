@@ -9,7 +9,10 @@ export async function POST(request: Request) {
     const newGroup = await prisma.group.create({
       data: {
         name: res.name,
-        private: res.private
+        private: res.private,
+        users: {
+          create: res.users
+        }
       }
     })
     return NextResponse.json({
@@ -17,7 +20,7 @@ export async function POST(request: Request) {
         id: newGroup.id,
         name: newGroup.name,
         privateGroup: newGroup.private,
-        createdAt: newGroup.createdAt
+        createdAt: newGroup.createdAt,
       }
     })
   } catch (error:any) {

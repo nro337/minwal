@@ -1,22 +1,26 @@
 'use client'
 
+import { User } from "@prisma/client";
 import { ChangeEvent, useState } from "react"
+import UsersDropdown from "./users";
 
-export const CreateGroupForm = () => {
+export const CreateGroupForm = ({users}:{users: User[]}) => {
   const [loading, setLoading] = useState<boolean>(false);
+  const [localUsers, setLocalUsers] = useState(users)
   const [formValues, setFormValues] = useState({
     name: "",
     private: false,
+    users: localUsers
   });
   const [error, setError] = useState<boolean>(false)
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setFormValues({ name: "", private: false });
+    setFormValues({ name: "", private: false, users: [] });
 
     try {
-      const res = await fetch("/api/groups", {
+      const res = await fetch("/api/creategroup", {
         method: "POST",
         body: JSON.stringify(formValues),
         headers: {
@@ -39,7 +43,7 @@ export const CreateGroupForm = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value, checked } = event.target;
-    setFormValues({ ...formValues, [name]: value, ['private']: checked ? true : false });
+    setFormValues({ ...formValues, [name]: value, ['private']: checked ? true : false, users: users });
   };
 
   const input_style =
@@ -74,6 +78,7 @@ export const CreateGroupForm = () => {
           className={`${input_style}`}
         />
       </div>
+      <UsersDropdown users={users} />
       <button
         type="submit"
         style={{ backgroundColor: `${loading ? "#ccc" : "#3446eb"}` }}
