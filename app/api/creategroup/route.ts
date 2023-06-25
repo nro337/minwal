@@ -10,8 +10,11 @@ export async function POST(request: Request) {
       data: {
         name: res.name,
         private: res.private,
+        // TODO: Fix to use current logged-in user's ID
         users: {
-          create: res.users
+          connect: {
+            id: 1
+          }
         }
       }
     })
